@@ -18,10 +18,9 @@ function cargarRegiones() {
 
 
 function getSeleccionRegiones() {
-    const checkboxes = document.querySelectorAll('input[name="region"]:checked');
-    const regiones = [];
-    checkboxes.forEach(cb => regiones.push(cb.value));
-    return regiones;
+    const selector = document.getElementById("selector");
+    const regionesSeleccionadas = Array.from(selector.selectedOptions).map(option => option.value);
+    return regionesSeleccionadas.map(option=> option.value);
   }
 function mostrarTabla(){
     fetch('/data')
