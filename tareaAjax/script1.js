@@ -1,3 +1,22 @@
+function cargarRegiones() {
+    fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+            const regionesUnicas = [...new Set(data.map(u => u.region))]; 
+            const selector = document.getElementById('selector');
+            selector.innerHTML = ''; 
+            regionesUnicas.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                selector.appendChild(option);
+            });
+            selector.multiple = true;
+        })
+        .catch(error => console.error("error al cargar las regiones:", error));
+}
+
+
 function getSeleccionRegiones() {
     const checkboxes = document.querySelectorAll('input[name="region"]:checked');
     const regiones = [];
