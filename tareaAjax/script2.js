@@ -24,5 +24,26 @@ function cargarTabla(){
             diasUnicos.forEach(dia => {
                 encabezadoHTML += `<th>${dia}</th>`;
             });
+            encabezadoHTML += "</tr>";
+            thead.innerHTML = encabezadoHTML;
+            tabla.appendChild(thead);
 
-        }
+            const tbody = document.createElement("tbody");
+            datosFiltrados.forEach(regionData => {
+                const fila = document.createElement("tr");
+                let filaHTML = `<td>${regionData.region}</td>`;
+                diasUnicos.forEach(dia => {
+                    const diaData = regionData.confirmed.find(c => c.date === dia);
+                    filaHTML += `<td>${diaData ? diaData.value : 0}</td>`;
+                });
+                fila.innerHTML = filaHTML;
+                tbody.appendChild(fila);
+            });
+            contenedor.appendChild(tabla);
+        })
+        .catch(error => console.error("Error al cargar la tabla:", error));
+}
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM cargado");
+    cargarTabla();
+})
