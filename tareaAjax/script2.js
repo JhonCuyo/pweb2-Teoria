@@ -1,4 +1,3 @@
-const { response } = require("express");
 
 function cargarTabla(){
     fetch("/data")
@@ -39,6 +38,7 @@ function cargarTabla(){
                 fila.innerHTML = filaHTML;
                 tbody.appendChild(fila);
             });
+            tabla.appendChild(tbody);
             contenedor.appendChild(tabla);
         })
         .catch(error => console.error("Error al cargar la tabla:", error));
