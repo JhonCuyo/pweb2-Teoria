@@ -14,4 +14,14 @@ function getSeleccionRegiones() {
     regionSeleccionada.forEach(region => {
         conteo[region] = data.filter(u => u.region === region).length;
       });
+const contenedor=document.getElementById("contenedor");
+contenedor.innerHTML="";
+
+const tabla=document.createElement("table");
+table.border="1";
+
+const thead = document.createElement('thead');
+thead.innerHTML = '<tr><th>Región</th><th>Cantidad</th></tr>';
+tabla.appendChild(thead);
+
   }
