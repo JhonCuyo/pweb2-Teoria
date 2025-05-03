@@ -21,7 +21,7 @@ function cargarRegiones() {
 function getSeleccionRegiones() {
     const selector = document.getElementById("selector");
     const regionesSeleccionadas = Array.from(selector.selectedOptions).map(option => option.value);
-    return regionesSeleccionadas.map(option=> option.value);
+    return regionesSeleccionadas;
   }
 function mostrarTabla(){
     fetch('/data')
@@ -31,7 +31,8 @@ function mostrarTabla(){
     const conteo = {};
 
     regionSeleccionada.forEach(region => {
-    conteo[region] = data.filter(u => u.region === region).length;
+    const cantidad = data.filter(u => u.region === region).length;
+    conteo[region] = cantidad || 0; 
     });
     const contenedor=document.getElementById("contenedor");
     contenedor.innerHTML="";
