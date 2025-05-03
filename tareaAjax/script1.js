@@ -1,4 +1,5 @@
 function cargarRegiones() {
+    console.log("cargando regiones");
     fetch('/data')
         .then(response => response.json())
         .then(data => {
@@ -36,7 +37,7 @@ function mostrarTabla(){
     contenedor.innerHTML="";
 
     const tabla=document.createElement("table");
-    table.border="1";
+    tabla.border="1";
 
     const thead = document.createElement('thead');
     thead.innerHTML = '<tr><th>Región</th><th>Cantidad</th></tr>';
@@ -52,3 +53,7 @@ function mostrarTabla(){
     contenedor.appendChild(tabla);
     });
 }
+document.addEventListener("DOMContentLoaded",()=>{
+    console.log("DOM cargado");
+    cargarRegiones();
+})
