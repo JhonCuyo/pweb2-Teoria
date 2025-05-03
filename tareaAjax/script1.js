@@ -5,12 +5,12 @@ function cargarRegiones() {
         .then(data => {
             const regionesUnicas = [...new Set(data.map(u => u.region))]; 
             const container = document.getElementById("checkbox-container");
-            selector.innerHTML = ''; 
+            container.innerHTML = ''; 
             regionesUnicas.forEach(region => {
                 const label = document.createElement("label");
                 label.style.display = "block";
                 label.innerHTML = `<input type="checkbox" value="${region}" class="region-checkbox"> ${region}`;
-                selector.appendChild(option);
+                container.appendChild(label);
             });
         })
         .catch(error => console.error("error al cargar las regiones:", error));
@@ -26,32 +26,47 @@ function mostrarTabla(){
     fetch('/data')
     .then(response => response.json())
     .then(data => {
-    const regionSeleccionada = getSeleccionRegiones();
-    const conteo = {};
+    const regionesSeleccionadas = getSeleccionRegiones();
+    const contenedor = document.getElementById("contenedor");
+            contenedor.innerHTML = ""; 
 
-    regionSeleccionada.forEach(region => {
-    const cantidad = data.filter(u => u.region === region).length;
-    conteo[region] = cantidad || 0; 
-    });
-    const contenedor=document.getElementById("contenedor");
-    contenedor.innerHTML="";
+            if (regionesSeleccionadas.length === 0) {
+                contenedor.innerHTML = "<p>Por favor, selecciona al menos una región.</p>";
+                return;
+            }
 
-    const tabla=document.createElement("table");
-    tabla.border="1";
+            const datosFiltrados = data.filter(u => regionesSeleccionadas.includes(u.region));
 
-    const thead = document.createElement('thead');
-    thead.innerHTML = '<tr><th>Región</th><th>Cantidad</th></tr>';
-    tabla.appendChild(thead);
+            const diasUnicos = [...new Set(datosFiltrados.flatMap(u => u.confirmed.map(c => c.date)))].sort();
 
-    const tbody = document.createElement('tbody');
-    for (let region in conteo) {
-        const fila = document.createElement('tr');
-        fila.innerHTML = `<td>${region}</td><td>${conteo[region]}</td>`;
-        tbody.appendChild(fila);
-    }
-    tabla.appendChild(tbody);
-    contenedor.appendChild(tabla);
-    });
+            const tabla = document.createElement("table");
+            tabla.border = "1";
+
+            const thead = document.createElement("thead");
+            let encabezadoHTML = "<tr><th>Región</th>";
+            diasUnicos.forEach(dia => {
+                encabezadoHTML += `<th>${dia}</th>`;
+            });
+            encabezadoHTML += "</tr>";
+            thead.innerHTML = encabezadoHTML;
+            tabla.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            datosFiltrados.forEach(regionData => {
+                const fila = document.createElement("tr");
+                let filaHTML = `<td>${regionData.region}</td>`;
+                diasUnicos.forEach(dia => {
+                    const diaData = regionData.confirmed.find(c => c.date === dia);
+                    filaHTML += `<td>${diaData ? diaData.value : 0}</td>`;
+                });
+                fila.innerHTML = filaHTML;
+                tbody.appendChild(fila);
+            });
+            tabla.appendChild(tbody);
+
+            contenedor.appendChild(tabla);
+        })
+        .catch(error => console.error("Error al mostrar la tabla:", error));
 }
 document.addEventListener("DOMContentLoaded",()=>{
     console.log("DOM cargado");
