@@ -4,23 +4,22 @@ function cargarRegiones() {
         .then(response => response.json())
         .then(data => {
             const regionesUnicas = [...new Set(data.map(u => u.region))]; 
-            const selector = document.getElementById('selector');
+            const container = document.getElementById("checkbox-container");
             selector.innerHTML = ''; 
             regionesUnicas.forEach(region => {
-                const option = document.createElement('option');
-                option.value = region;
-                option.textContent = region;
+                const label = document.createElement("label");
+                label.style.display = "block";
+                label.innerHTML = `<input type="checkbox" value="${region}" class="region-checkbox"> ${region}`;
                 selector.appendChild(option);
             });
-            selector.multiple = true;
         })
         .catch(error => console.error("error al cargar las regiones:", error));
 }
 
 
 function getSeleccionRegiones() {
-    const selector = document.getElementById("selector");
-    const regionesSeleccionadas = Array.from(selector.selectedOptions).map(option => option.value);
+    const checkboxes = document.querySelectorAll('.region-checkbox:checked');
+    const regionesSeleccionadas = Array.from(checkboxes).map(checkbox => checkbox.value);
     return regionesSeleccionadas;
   }
 function mostrarTabla(){
