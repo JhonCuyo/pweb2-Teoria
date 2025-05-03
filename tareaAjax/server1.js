@@ -3,12 +3,12 @@ const fs=require("fs");
 const path=require("path");
 const app=express();
 
-app.use(express.static("pub"));
+app.use(express.static(__dirname)); // Servir archivos estáticos desde el directorio actual
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'problema1.html'));
   });
-  app.get('/script.js', (req, res) => {
+  app.get('/script1.js', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'script1.js'));
   });
 
