@@ -37,7 +37,8 @@ function mostrarTabla(){
 
             const datosFiltrados = data.filter(u => regionesSeleccionadas.includes(u.region));
 
-            const diasUnicos = [...new Set(datosFiltrados.flatMap(u => u.confirmed.map(c => c.date)))].sort();
+            const diasUnicos = [...new Set(datosFiltrados.flatMap(u => u.confirmed.map(c => c.date)))]
+                    .sort((a, b) => new Date(a) - new Date(b));
 
             const tabla = document.createElement("table");
             tabla.border = "1";
