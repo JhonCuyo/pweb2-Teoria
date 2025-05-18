@@ -10,6 +10,6 @@ filas = cursor.fetchall()
 
 peliculas = [{"Title": fila[0], "Year": fila[1], "Score": fila[2]} for fila in filas]
 
-print("Content-Type: application/json")
+print("Content-Type: application/json\n")
 print(json.dumps(peliculas))
 data.close()

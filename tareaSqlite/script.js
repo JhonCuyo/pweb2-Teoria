@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#btn").click(function () {
+    $("#boton").click(function () {
         $.ajax({
             url: "cgi-bin/peliculas.py",
             type: "GET",
