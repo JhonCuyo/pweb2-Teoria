@@ -20,8 +20,15 @@ for titulo, year, score, actor in cursor.fetchall():
     if key not in peliculas_dict:
         peliculas_dict[key] = []
     peliculas_dict[key].append(actor)
-
-peliculas = [{"Title": fila[0], "Year": fila[1], "Score": fila[2]} for fila in filas]
+# Convertir al formato deseado
+peliculas = []
+for (titulo, year, score), actores in peliculas_dict.items():
+    peliculas.append({
+        "Title": titulo,
+        "Year": year,
+        "Score": score,
+        "Actors": actores
+    })
 
 print("Content-Type: application/json\n")
 print(json.dumps(peliculas))
