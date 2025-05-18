@@ -6,15 +6,15 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 $("#resultado").empty();
-                if (Array.isArray(data)) {
                     data.forEach(function (p){
+                        let actores = p.Actors.join(", ");
                         $("#resultado").append(
-                            `<p><strong>${p.Title}</strong> (${p.Year}) - Score: ${p.Score}</p>`
+                            `<div>
+                            <p><strong>${p.Title}</strong> (${p.Year}) - Score: ${p.Score}</p>
+                            <p><em>Actores:</em> ${actores}</p>
+                            </div><hr>`
                         );
                     });
-                } else {
-                    $("#resultado").append("<p>La respuesta no es un arreglo.</p>");
-                }
             },
             error: function (xhr, status, error) {
                 console.error("Error al obtener los datos:", status, error);
