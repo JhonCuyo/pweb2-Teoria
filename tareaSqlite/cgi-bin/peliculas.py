@@ -5,7 +5,13 @@ import json
 data = sqlite3.connect("imdb.db")
 cursor = data.cursor()
 
-cursor.execute("SELECT Title, Year, Score From Movie")
+cursor.execute("""
+SELECT Movie.Title, Movie.Year, Movie.Score, Actor.Name
+FROM Movie
+JOIN Casting ON Movie.MovieID = Casting.MovieID
+JOIN Actor ON Casting.ActorId = Actor.ActorId
+ORDER BY Movie.Title, Casting.Ordinal
+""")
 filas = cursor.fetchall()
 
 peliculas = [{"Title": fila[0], "Year": fila[1], "Score": fila[2]} for fila in filas]
