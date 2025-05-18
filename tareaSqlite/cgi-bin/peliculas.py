@@ -7,3 +7,9 @@ cursor = data.cursor()
 
 cursor.execute("SELECT Title, Year, Score From Movie")
 filas = cursor.fetchall()
+
+peliculas = [{"Title": fila[0], "Year": fila[1], "Score": fila[2]} for fila in filas]
+
+print("Content-Type: application/json")
+print(json.dumps(peliculas))
+data.close()
