@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h1>{{nombre}}</h1>
+    <h2>
+        {% if edad > 48 %}
+        debe cuidarse del colesterol
+        {% else %}
+        puede comer lo que quiera
+        {% endif %}
+    </h2>
+    {% endblock %}
+</body>
+</html>
