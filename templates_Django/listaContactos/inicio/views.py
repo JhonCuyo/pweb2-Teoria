@@ -7,8 +7,8 @@ def myHomeView(request,*args, **kwargs):
         'myText': 'Esto es sobre nosotros',
         'myNumber': 123,
         'myList': [33,44,55],
-    }
-    return render(request,"home.html",myContext)
+        }
+    return render(request, "home.html", myContext)
 
 def anotherView(request):
     return HttpResponse('<h1>Solo otra Pagina</h1>')
