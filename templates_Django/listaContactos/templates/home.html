@@ -10,9 +10,10 @@
     {% block content %}
     <h1>Hola Mundo desde DJango</h1>
     <h2>con Templates</h2>
-    {{ request.user}}
-    <br>
-    {{ request.user.is_authenticated }}
+    <p>
+        {{myText}},
+        {{myNumber}}
+    </p>
     {% endblock %}
 </body>
 </html>
