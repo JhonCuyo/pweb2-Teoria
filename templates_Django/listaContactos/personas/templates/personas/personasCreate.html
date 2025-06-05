@@ -8,7 +8,7 @@
 <body>
     {% extends 'base.html' %} 
     {% block content %}
-    <form action="add" method="GET"> 
+    <form action="add" method="POST"> {% csrf_token %}
         <input type="text" name="q" placeholder="buscar"/>
         <input type="submit" value="Buscar"/>
     </form>
