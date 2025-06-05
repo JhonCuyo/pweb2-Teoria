@@ -19,3 +19,6 @@ def personaCreativeView(request):
         'form': form
     }
     return render(request, 'personas/crear.html', context)
+
+def searchForHelp(request):
+    return render(request, 'personas/search.html', {})
