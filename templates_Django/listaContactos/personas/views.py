@@ -7,5 +7,5 @@ def personaTestView(request):
         'nombre': obj.nombres,
         'edad': obj.edad,
         }
-    return render(request, 'personas/test.html', context)
+    return render(request, 'personas/descripcion.html', context)
     
