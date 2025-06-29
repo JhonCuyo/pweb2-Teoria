@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Persona
 from .forms import PersonaForm
-from django.views.generic.list import (ListView, DetailView)
+from django.views.generic.list import (ListView, DetailView,
+                                       CreateView,)
 
 def personaTestView(request):
     obj = Persona.objects.get(id=1)
@@ -27,4 +28,8 @@ class PersonaListView(ListView):
 
 class PersonaDetailView(ListView):
     model = Persona
+
+class PersonaCreateView(CreateView):
+    model = Persona
+    fields = ['nombres', 'apellidos', 'edad', 'donador']
     
