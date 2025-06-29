@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Persona
 from .forms import PersonaForm
-from django.views.generic.list import (ListView,)
+from django.views.generic.list import (ListView, DetailView)
 
 def personaTestView(request):
     obj = Persona.objects.get(id=1)
@@ -24,3 +24,7 @@ def searchForHelp(request):
 class PersonaListView(ListView):
     model= Persona
     queryset = Persona.objects.filter(edad__lte='40')
+
+class PersonaDetailView(ListView):
+    model = Persona
+    
